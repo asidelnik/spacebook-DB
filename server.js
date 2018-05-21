@@ -4,9 +4,14 @@ var mongoose = require('mongoose');
 
 const SERVER_PORT = 8080;
 
-mongoose.connect('mongodb://localhost/spacebookDB', function() {
+// mongoose.connect('mongodb://localhost/spacebookDB', function() {
+//   console.log("DB connection established!!!");
+// })
+
+mongoose.connect(process.env.CONNECTION_STRING||'mongodb://localhost/spacebookDB', function() {
   console.log("DB connection established!!!");
 })
+
 
 var Post = require('./models/postModel');
 //var Comment = require('./models/postModel');
@@ -131,7 +136,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
-
-app.listen(SERVER_PORT, () => {
+//app.listen(process.env.PORT || SERVER_PORT );
+app.listen(process.env.PORT || SERVER_PORT, () => {
   console.log("Server started on port " + SERVER_PORT);
 });
